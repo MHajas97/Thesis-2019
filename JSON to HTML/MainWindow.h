@@ -217,9 +217,7 @@ namespace JSONtoHTML {
 
 
 private: System::Void browseBtn_Click(System::Object^  sender, System::EventArgs^  e) 
-{
-	IO::Stream^ myStream;
-	OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog;
+{	OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog;
 
 	{
 		msclr::interop::marshal_context context;
