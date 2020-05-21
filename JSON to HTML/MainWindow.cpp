@@ -17,6 +17,8 @@ void elementsExpand(Json json);
 
 void JSONtoHTML::MainWindow::startProgram(std::vector<std::string>* input)
 {
+	if (f.is_open())
+		std::cout << "file opened";
 	for (auto file= input->begin();file!= input->end(); ++file)
 	{
 		std::ifstream inputFile(*file);
