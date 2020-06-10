@@ -108,27 +108,4 @@ table, th, td{border: 1px solid black;border - collapse: collapse;}
 <tr><td>description: Home page, storing precious lorem ipsum texts since 1999</td>
 <td>keywords: HTML, generated, automatically, page, internet, memes, library, internet2</td>
 <td>title: Automatically Generated HTML Page</td>
-</tr></tr></table><!DOCTYPE HTML>
-<html>
-<head>
-<meta name="description" content="Home page, storing precious lorem ipsum texts since 1999"/>
-<meta name="keywords" content="HTML, generated, automatically, page, internet, memes, library, internet2"/>
-<meta name="title" content="Automatically Generated HTML Page"/>
-</head>
-<body>
-<footer style ="
-background:#99ff99;size:100% 300px ;<hr style="width:3px;"/>
-<text style="alignment:left;color:#000066;font-size:16px;">Turpis lorem inceptos</text>
-<hr style="width:1px;"/>
-<text style="alignment:center;color:#000077;font-size:13px;">This website has no copyright holder, 2016</text>
-</footer>
-<header style ="
-background:#6699ff;margin-bottom:30px;margin-top:20px;size:100% 150px ;<text style="alignment:center;color:#FFFFFF;font-size:30px;font-weight:bold;">900 Searchable works of lorem ipusm literature</text>
-<text style="alignment:center;color:#DDDDDD;font-size:20px;text-shadow:2px 2px #555555;">This site was automatically generated from a JSON file</text>
-</header>
-<main>
-<menu style="background:#ccffff;padding-bottom:50px;padding-left:10px;padding-right:30px;padding-top:10px;position:left;size:300px 800px ;">
-<a href=https://wwww.google.com/ style="color:#cc3300;padding-left:10px;">Home</a>
-<a href=https://www.imdb.com/ style="color:#cc3300;padding-left:10px;">About Us</a>
-<a href=https://www.opswat.com/ style="color:#006699;padding-left:15px;">Support</a>
-<a href=https://www.comca
+</tr></tr></table>

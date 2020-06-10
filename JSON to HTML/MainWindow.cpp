@@ -34,6 +34,7 @@ void JSONtoHTML::MainWindow::startProgram(std::vector<std::string>* input)
 		f << "</html>";
 	}
 
+	f.close();
 };
 
 void sizeStyle(Json json)
@@ -422,7 +423,7 @@ void tableelementsExpand(Json json)
 					}
 					else
 					{
-						if (j.first == "size" || j.first == "padding")
+						if (j.first == "size" || j.first == "padding"|| j.first=="margin")
 							subTable(j.second);
 						else
 						{
@@ -503,7 +504,7 @@ void JSONtoHTML::MainWindow::startTable(std::vector<std::string>* input)
 							}
 					}
 			}
-			else
+			else if(m.second.is_array())
 			{
 				std::cout << "<table>" << '\n' << "<tr>";
 				f << "<table>" << '\n' << "<tr>";
@@ -516,5 +517,6 @@ void JSONtoHTML::MainWindow::startTable(std::vector<std::string>* input)
 		std::cout << "</tr></table>";
 		f << "</tr></table>";
 	}
+	f.close();
 }
 
