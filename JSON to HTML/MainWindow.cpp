@@ -374,6 +374,7 @@ void subTable(Json json)
 		f << "<tr>";
 	for (auto &i : json.object_items())
 	{
+
 		std::cout << "<td>" << i.first << ": " << i.second.string_value() << "</td>" << '\n';
 		f << "<td>" << i.first << ": " << i.second.string_value() << "</td>" << '\n';
 	}
@@ -383,19 +384,26 @@ void subTable(Json json)
 
 void tableExpand(Json json)
 {
-	std::cout << "<table>" << '\n' << "<tr>";
-	f << "<table>" << '\n' << "<tr>";
+
+	std::cout << "<table>" << '\n';
+	f << "<table>" << '\n';
 	for (auto &n : json.object_items())
 	{
 
-		std::cout <<"<td>"<< n.first<<"</td>"<<std::endl;
-		f << "<td>" << n.first << "</td>" << std::endl;
+			std::cout << "<th>" << n.first << "</th>" << std::endl;
+			f << "<th>" << n.first << "</th>" << std::endl;
 
-		if (!n.second.is_null())
-			tableExpand(n.second.object_items());
+			if (!n.second.is_null())
+				tableExpand(n.second.object_items());
+			else
+			{
+				std::cout << "<tr>" << n.second.string_value() << "</tr>" << std::endl;
+				f << "<tr>" << n.second.string_value() << "</tr>" << std::endl;
+
+			}
 	}
-	std::cout << "</tr>" << '\n'<<"</table>";
-	f << "</tr>" << '\n' << "</table>";
+	std::cout << '\n'<<"</table>";
+	f <<'\n' << "</table>";
 }
 
 void tableelementsExpand(Json json)
@@ -403,13 +411,11 @@ void tableelementsExpand(Json json)
 
 	for (auto &i : json.array_items())
 	{
-		std::cout << "<table>";
-		f << "<table>";
+
+
 			for (auto &j : i.object_items())
 
 			{
-				std::cout << "<tr>";
-				f << "<tr>";
 				if (!j.second.is_array())
 				{
 					if (j.second.object_items().empty())
@@ -423,28 +429,39 @@ void tableelementsExpand(Json json)
 					}
 					else
 					{
-						if (j.first == "size" || j.first == "padding"|| j.first=="margin")
+						if (j.first == "size" || j.first == "padding")
+						{
+
 							subTable(j.second);
+						}
 						else
 						{
+							std::cout << "<th>"<< '\n';
+							f << "<th>" << '\n';
 							std::cout << j.first<<'\n';
 							f << j.first << '\n';
+							std::cout << "</th>" << '\n';
+							f << "</th>" << '\n';
 							tableExpand(j.second);
 						}
 					}
 				}
 				else 
 				{
+					std::cout << "<td>";
+					f << "<td>";
+					std::cout << "<table>";
+					f << "<table>";
 					tableelementsExpand(j.second);
+					std::cout << "</table>";
+					f << "</table>";
+					std::cout << "</td>";
+					f << "</td>";
 				
 				}
 				
 			}
 
-		std::cout << "</tr>";
-		f << "</tr>";
-		std::cout << "</table>";
-		f << "</table>";
 	}
 
 }
@@ -466,21 +483,26 @@ void JSONtoHTML::MainWindow::startTable(std::vector<std::string>* input)
 		f << "<table>" << '\n';
 		for (auto &m : json.object_items())
 		{
+			if (m.first == "main")
+				int plm = 1;
+
 			std::cout << "<table >" << '\n';
 			f << "<table>" << '\n';
-			std::cout << "<th>" << m.first << "</th>" << '\n'<<"<tr>";
-			f << "<th>" << m.first << "</th>" << '\n'<<"<tr>";
+			std::cout << "<th>" << m.first << "</th>" << '\n';
+			f << "<th>" << m.first << "</th>" << '\n';
 			if(m.second.is_object())
 			for (auto &n : m.second.object_items())
 			{
 
 				if (n.second.is_array())
 				{
+
 					tableelementsExpand(n.second);
 				}
 				else
 					if (n.second.object_items().empty())
 					{
+
 						std::cout <<"<td>"<<n.first << ": " << n.second.string_value()<<"</td>"<<'\n';
 						f << "<td>" << n.first << ": " << n.second.string_value() << "</td>" << '\n';
 					}
@@ -496,8 +518,19 @@ void JSONtoHTML::MainWindow::startTable(std::vector<std::string>* input)
 							f << "</table>";
 						}
 						else
-							if (n.first != "size")
+							if (n.first == "margin")
 							{
+								std::cout << "<table>" << '\n' << "<th>" << n.first << "</th>" << '\n';
+								f << "<table>" << '\n' << "<th>" << n.first << "</th>" << '\n';
+								subTable(n.second);
+
+								std::cout << "</table>";
+								f << "</table>";
+							}
+							else
+							if (n.first != "size" && n.first!= "margin")
+							{
+
 								std::cout << n.first << ": " << n.second.string_value();
 								f << n.first << ": " << n.second.string_value();
 								tableExpand(n.second);
@@ -506,12 +539,8 @@ void JSONtoHTML::MainWindow::startTable(std::vector<std::string>* input)
 			}
 			else if(m.second.is_array())
 			{
-				std::cout << "<table>" << '\n' << "<tr>";
-				f << "<table>" << '\n' << "<tr>";
 				tableelementsExpand(m.second);
 			}
-			std::cout << "</tr>";
-			f << "</tr>";
 		}
 
 		std::cout << "</tr></table>";
